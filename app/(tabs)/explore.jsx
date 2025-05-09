@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 
 
-export default function TabTwoScreen() {
+export default function Explore() {
   return (
     <Stack>
 

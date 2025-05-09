@@ -1,19 +1,12 @@
-import { useFonts } from 'expo-font';
 import { Stack, Tabs } from 'expo-router';
 import React from 'react';
 
-
 export default function TabLayout() {
  
-useFonts({
-  'outfit': require('../../assets/fonts/Outfit-Regular.ttf'),
-  'outfit-bold':require('../../assets/fonts/Outfit-Bold.ttf')
-})
   return (
-    <Stack
+     <Stack
       screenOptions={{
         headerShown: false,
-       
       }}>
         </Stack>
      );
