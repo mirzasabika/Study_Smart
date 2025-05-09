@@ -1,10 +1,13 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import Header from '../../components/Home/Header'
 
 export default function Home() {
   return (
-    <View>
-      <Text>home</Text>
+    <View style={{padding:25, 
+        paddingTop:Plateform.OS == 'ios' && 45
+    }}>
+    <Header/>
     </View>
   )
 }
