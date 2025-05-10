@@ -3,16 +3,17 @@ import React, { useContext, useState } from 'react'
 import Colors  from './../../constants/Colors';
 import { useRouter } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { setDoc } from 'firebase/firestore';
-import { auth } from './../../config/firebaseConfig';
+import { setDoc, doc } from 'firebase/firestore';
+import { auth, db} from './../../config/firebaseConfig';
 import{UserDetailContext} from './../../context/UserDetailContext'
+
 
 
 export default function SignUp() {
   const router=useRouter();
-  const [fullName, setFullName] =useState();
-  const [email, setEmail] =useState();
-  const [password, setPassword] =useState();
+  const [fullName, setFullName] =useState("");
+  const [email, setEmail] =useState("");
+  const [password, setPassword] =useState("");
   const {userDetail,setUserDetail} = useContext(UserDetailContext)
 
   const CreateNewAccount=()=>{
@@ -22,6 +23,8 @@ export default function SignUp() {
       //save user to database
      }).catch(e=>{
       console.log(e.message)
+      ToastAndroid.show('Something went wrong. Try again.', ToastAndroid.SHORT);
+
      })
   }
   
@@ -34,7 +37,7 @@ export default function SignUp() {
       uid: user?.uid
     }
     await setDoc(doc(db, 'users', email), data)
-
+      console.log(data)
     setUserDetail(data)
 
     //navigate to new screen
@@ -60,7 +63,8 @@ export default function SignUp() {
         fontFamily:'outfit-bold'
       }}> Create an Account</Text>
 
-      <TextInput placeholder='Full Name' onChangeText={(value)=>setFullName(value)} style={styles.textInput} />
+      <TextInput placeholder='Full Name' onChangeText={(value)=>  { console.log('Full Name typed:', value); setFullName(value)}} style={styles.textInput} />
+
       <TextInput placeholder='Email' onChangeText={(value)=>setEmail(value)}  style={styles.textInput} />
       <TextInput placeholder='Password' onChangeText={(value)=>setPassword(value)}  secureTextEntry={true} style={styles.textInput} />
 
@@ -90,7 +94,7 @@ export default function SignUp() {
         fontFamily: 'outfit',
       }}>Already have an account?</Text>
       <Pressable
-      onPress={()=>router.push('/auth/SignIn')}
+      onPress={()=>router.push('/SignIn')}
       >
           <Text style={{
             color: Colors.PRIMARY,

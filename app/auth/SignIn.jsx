@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { UserDetailContext } from './../../context/UserDetailContext';
 import { auth,db } from './../../config/firebaseConfig';
 import { getDoc,doc } from 'firebase/firestore';
+import { ToastAndroid } from 'react-native';
 
 
 export default function SignIn() {
